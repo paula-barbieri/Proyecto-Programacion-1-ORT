@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/clases.js"></script>
+      <script src="js/codigo.js"></script>
+      <link rel="stylesheet" href="css/estilos.css" />
+      <title>Alquiler de Máquinas Virtuales</title>
+  </head>
+  <body>
+    <div id="contenedor">
+      <div id="cabezal" class="clearfix">
+        <img id="logo" src="imágenes/computadora.png" width="60"> 
+        <!-- Menú usuario -->
+        <ul id="menuUsuario">
+          <li>
+            <a id="menuAlquilarMaquina">Alquilar una Máquina</a>
+          </li>
+          <li>
+            <a id="menuVerAlquiler">Mis alquileres</a>
+          </li>
+          <li>
+            <a id="menuMisGastos">Mis gastos</a>
+          </li>
+          <li>
+            <a id="menuSalir">Salir</a>
+          </li>
+        </ul>
+        <!-- Menú administrador -->
+        <ul id="menuAdmin">
+          <li>
+            <a id="listarUsuarios">Listar Usuarios</a>
+          </li>
+          <li>
+            <a id="menuStock">Stock</a>
+          </li>
+          <li>
+            <a id="informeMaquinas">Informes de máquinas</a>
+          </li>
+          <li>
+            <a id="menuSalirAdmin">Salir</a>
+          </li>
+        </ul>
+      </div>   
+      <!-- FIN CABEZAL -->
+      <div id="contenido">
+        <div id="InicioSesión">
+            <h2>Bienvenido</h2>
+            <h3>Inicio de Sesión</h3>
+            <!-- INPUTS -->
+            <label for="nombreUsuario">Nombre de ususario: </label>
+            <input id="nombreUsuario" type="text"><br>
+            <label for="clave">Contraseña: </label>
+            <input id="clave" type="password"><br>
+            <input type="button" id="ingresar" value="Ingresar"><br><br>
+            <p id="mensajesLogin"></p><br><br>
+            
+            <label for="btnIrAregistro">¿Usuario nuevo? Podés registrarte haciendo click </label>
+            <input type="button" id="btnIrAregistro" value="Registrarme como nuevo usuario">
+        </div>
+        <!-- Registro usuario -->
+        <div id="registroUsuario">
+          <h2>Registro</h2>
+          <label for="nombre">Nombre: </label> <input id="nombre" type="text"><br>
+          <label for="apellido">Apellido: </label>  <input id="apellido" type="text"><br>
+          <label for="registroNombreUsuario">Nombre de ususario: </label> <input id="registroNombreUsuario" type="text"><br>
+          <label for="contraseña">Contraseña: </label>
+          <input id="contraseña" type="password">
+          <p>Debe contener al menos 5 carateres entre letras y números, una mayúscula y una minúscula.</p><br>
+          <label for="tarjetaCredito">Tarjeta de crédito:</label>
+          <input id="tarjetaCredito" type="text">
+          <label for="CVCtarjetaCredito">CVC:</label>
+          <input id="CVCtarjetaCredito" type="number"><br><br>
+          <input type="button" id="registrarme" value="Registrarme"><br><br>  
+          <p id="msjRegistroUsuario"></p>  <br>
+          <input type="button" id="volver" value="Volver">
+        </div>
+
+        <div id="registroExitoso">
+          <p id="finregistro">Gracias por tu registro, debes esperar a que un administrador te habilite</p>
+          <input type="button" id="volverAlInicio" value="Salir"><br><br>
+        </div>
+
+        <!-- Alquilar máquinas -->
+        <div id="selectInstancias">
+          <h2>Alquilar una máquina</h2>
+          <label for="tipoInstancia">Selecciona un tipo de instancia:</label>
+          <select id="tipoInstancia" name="tipoInstancia">
+              <option value="" disabled selected>Seleccione tipo de instancia</option>
+              <optgroup label="Optimizadas para cómputo">
+                  <option value="c7s">c7.small (costo por alquiler: U$S 20 - costo por encendido: USD 2.50)</option>
+                  <option value="c7m">c7.medium (costo por alquiler: U$S 30 - costo por encendido: USD 3.50)</option>
+                  <option value="c7l">c7.large (costo por alquiler: U$S 50 - costo por encendido: USD 6.00)</option>
+              </optgroup>
+              <optgroup label="Optimizadas para memoria">
+                  <option value="r7s">r7.small (costo por alquiler: U$S 35 - costo por encendido: USD 4.00)</option>
+                  <option value="r7m">r7.medium (costo por alquiler: U$S 50 - costo por encendido: USD 6.50)</option>
+                  <option value="r7l">r7.large (costo por alquiler: U$S 60 - costo por encendido: USD 7.00)</option>
+              </optgroup>
+              <optgroup label="Optimizadas para almacenamiento">
+                  <option value="i7m">i7.medium (costo por alquiler: U$S 30 - costo por encendido: USD 3.50)</option>
+                  <option value="i7l">i7.large (costo por alquiler: U$S 50 - costo por encendido: USD 6.50)</option>
+              </optgroup>
+          </select>
+          <input type="button" id="alquilar" value="Alquilar"><br><br>  
+          <p id="mensajeAlquiler"></p>
+        </div>
+
+        <!-- Filtrar máquinas alquiladas -->
+        <div id="maquinasAlquiladas">
+          <h2>Mis máquinas alquiladas</h2>
+          <select id="filtroApagadoEncendido">
+            <option value="" selected>Seleccionar filtro</option>
+            <option value="T">Todas las instancias</option>
+            <option value="A">Instancias Apagadas</option>
+            <option value="E">Instancias Encendidas</option>
+          </select>
+
+          <!-- TABLAS -->
+          <table id="tablaInstanciasFiltro"></table>
+          <p id="textoInstancias"></p>
+        </div>
+        
+        <div id="costosAlquiler">
+          <h2>Mis gastos</h2>
+          <table id="tablaCostos"></table>  
+          <p id="textoCostos"></p>
+        </div>
+
+        <div id="tablaDeUsuarios">
+          <h2>Estado de usuarios</h2>
+          <table id="tablaUsuarios"></table>  
+          <p id="textoTablaUsuarios"></p>
+        </div>
+
+        <!-- STOCK -->
+        <div id="stock">
+          <h2>Gestión de stock</h2>
+          <select id="selectStock">
+            <option value="" disabled selected>Seleccione tipo de instancia</option>
+            <option value="c7s">c7.small</option>
+            <option value="c7m">c7.medium</option>
+            <option value="c7l">c7.large</option>
+            <option value="r7s">r7.small</option>
+            <option value="r7m">r7.medium</option>
+            <option value="r7l">r7.large</option>
+            <option value="i7m">i7.medium</option>
+            <option value="i7l">i7.large</option>
+          </select>
+          <input type="number" id="cantStock" value="">
+          <input type="button" id="incrementarStock" value="+">
+          <input type="button" id="disminuirStock" value="-"><br><br>
+          <p id="msjStock"></p>
+         
+        </div>
+
+        <div id="informeDeMaquinas">
+          <h2>Informe de máquinas virtuales</h2>
+          <table id="tablaInformeMaquinas"></table>
+          <p id="textoInformeMaquinas"></p>
+        </div>
+      </div>
+      <!-- FIN CONTENIDO -->
+
+      <div id="footer">
+        <img src="imágenes/computadora.png" width="60">
+        <h4 id="footerNombres">Paula Barbieri y Florencia De Coster</h4>
+        <h4 id="footerDos">PROGRAMACIÓN 1 | ANALISTA EN TI | 2023</h5>
+        <h4 id="footerTres">ORT</h5>
+      </div>
+      <div style="clear:both;"></div>
+      <!-- FIN PIE -->
+    </div>
+    <!-- FIN CONTENEDOR -->
+  </body>
+</html>
+
+
+
+
+
